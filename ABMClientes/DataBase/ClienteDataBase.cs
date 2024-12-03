@@ -20,6 +20,17 @@ namespace ABMClientes.DataBase
         private SqlConnection? _connection;
 
 
+
+        /// <summary>
+        /// Establece una conexión con la base de datos.
+        /// </summary>
+        /// <remarks>
+        /// Este método utiliza la cadena de conexión definida para abrir una conexión con la base de datos. 
+        /// Si se produce un error durante el intento de conexión, captura la excepción y asigna `null` a la conexión.
+        /// </remarks>
+        /// <exception cref="SqlException">
+        /// Lanza una excepción si no se puede conectar a la base de datos. El error es capturado e informado en la consola.
+        /// </exception>
         public void Conectar()
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ABMClientes;Trusted_Connection=True;TrustServerCertificate=True;";
@@ -41,6 +52,16 @@ namespace ABMClientes.DataBase
 
         }
 
+
+
+
+        /// <summary>
+        /// Cierra la conexión con la base de datos si está abierta.
+        /// </summary>
+        /// <remarks>
+        /// Este método verifica si la conexión actual no es nula y está en estado abierto. 
+        /// Si ambas condiciones se cumplen, cierra la conexión.
+        /// </remarks>
         public void Desconectar()
         {
             if (_connection != null && _connection.State == System.Data.ConnectionState.Open)
@@ -48,6 +69,8 @@ namespace ABMClientes.DataBase
                 _connection.Close();
             }
         }
+
+
 
         public void Crear(Cliente obj)
         {
@@ -132,6 +155,19 @@ namespace ABMClientes.DataBase
 
         public void Borrar(Cliente obj) { }
 
+
+        /// <summary>
+        /// Obtiene un cliente de la base de datos a partir de su identificador único.
+        /// </summary>
+        /// <param name="id">El identificador único del cliente que se desea buscar.</param>
+        /// <returns>
+        /// Un objeto <see cref="Cliente"/> que contiene la información del cliente correspondiente al ID proporcionado, 
+        /// o <c>null</c> si no se encuentra ningún cliente con el ID especificado.
+        /// </returns>
+        /// <remarks>
+        /// Este método se conecta a la base de datos, ejecuta una consulta SQL para buscar un cliente 
+        /// por su ID y mapea los datos devueltos en un objeto <see cref="Cliente"/>.
+        /// </remarks>
         public Cliente ObtenerPorId(int id)
         {
             Conectar();
@@ -169,6 +205,18 @@ namespace ABMClientes.DataBase
             return cliente;
         }
 
+
+        /// <summary>
+        /// Obtiene una lista con todos los clientes registrados en la base de datos.
+        /// </summary>
+        /// <returns>
+        /// Una lista de objetos <see cref="Cliente"/> que contiene la información de todos los clientes.
+        /// Si no hay clientes registrados, se devuelve una lista vacía.
+        /// </returns>
+        /// <remarks>
+        /// Este método se conecta a la base de datos, ejecuta una consulta SQL para obtener todos los registros
+        /// de la tabla "Clientes" y mapea los resultados en una lista de objetos <see cref="Cliente"/>.
+        /// </remarks>
         public List<Cliente> ObtenerTodos()
         {
             Conectar();
@@ -199,6 +247,19 @@ namespace ABMClientes.DataBase
             return clientes;
         }
 
+
+        /// <summary>
+        /// Busca clientes en la base de datos cuyo nombre contenga una cadena específica.
+        /// </summary>
+        /// <param name="nombre">El nombre o parte del nombre que se desea buscar.</param>
+        /// <returns>
+        /// Una lista de objetos <see cref="Cliente"/> que coinciden con el criterio de búsqueda.
+        /// Si no se encuentran coincidencias, se devuelve una lista vacía.
+        /// </returns>
+        /// <remarks>
+        /// Este método utiliza una consulta SQL con la cláusula `LIKE` para realizar una búsqueda parcial.
+        /// Se conecta a la base de datos, ejecuta la consulta y mapea los resultados en una lista de objetos <see cref="Cliente"/>.
+        /// </remarks>
         public List<Cliente> Search(string nombre)
         {
             Conectar();
@@ -230,8 +291,6 @@ namespace ABMClientes.DataBase
             Desconectar();
             return clientes;
         }
-
-
 
 
         /// <summary> DOCUMENTACION
@@ -440,6 +499,18 @@ namespace ABMClientes.DataBase
         }
 
 
+        /// <summary>
+        /// Valida si un ID es único en la base de datos de clientes.
+        /// </summary>
+        /// <param name="id">El ID que se desea verificar.</param>
+        /// <returns>
+        /// <c>true</c> si el ID no existe en la base de datos (es único); 
+        /// <c>false</c> si el ID ya existe.
+        /// </returns>
+        /// <remarks>
+        /// Este método utiliza una consulta SQL para contar cuántos registros tienen el ID proporcionado.
+        /// Si no se encuentra ningún registro con ese ID, el método devuelve <c>true</c>, indicando que el ID es único.
+        /// </remarks>
         public bool ValidarIdUnico(int id)
         {
             Conectar();
@@ -453,7 +524,5 @@ namespace ABMClientes.DataBase
 
             return count == 0; // Si no existe el ID, es único
         }
-
-
     }
 }
