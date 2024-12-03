@@ -1,0 +1,20 @@
+@ABMClientes_HostAddress = http://localhost:5020
+
+GET {{ABMClientes_HostAddress}}/weatherforecast/
+Accept: application/json
+
+
+###
+
+
+
+// Request para Obtener Todos los Clientes
+GET {{ABMClientes_HostAddress}}/api/cliente
+Accept: application/json
+###
+
+
+// Request para Obtener Por ID
+GET {{ABMClientes_HostAddress}}/api/cliente/3
+Accept: application/json
+###
