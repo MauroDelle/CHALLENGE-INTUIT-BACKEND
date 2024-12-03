@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ABMClientes")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+706ecad93c16d95c4372b3cd11a4f0855eb39a8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ABMClientes")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ABMClientes")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
